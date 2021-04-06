@@ -1,6 +1,7 @@
 import express from 'express';
 import { Kafka } from 'kafkajs';
 import { routes } from './routes';
+const PORT = 3333;
 
 const app = express();
 
@@ -26,7 +27,9 @@ app.use(routes);
 const run = async () => {
     await producer.connect();
 
-    app.listen(3333);
+    app.listen(PORT, () => {
+        console.log(`Listening in port ${PORT}`)
+    });
 }
 
 run().catch(console.error);
